@@ -1,0 +1,75 @@
+Local Installation
+
+https://docs.mongodb.com/manual/installation/
+https://docs.mongodb.com/compass/current/
+
+* set path
+* create a folder where db will be saved on ur local file system
+default is C:/db/data -- so do create this
+
+Start your local mongo server by
+mongod
+mongod --dbpath=xxxx
+mongod.exe --smallfiles --noprealloc
+
+
+Mongo Shell
+The mongo shell is an interactive JavaScript interface to MongoDB. You can use the mongo shell to query and update data as well as perform administrative operations.
+
+start your mongo shell
+mongo
+
+basic commands
+help
+
+To display the database you are using, type db:
+db
+default connects to test
+
+To list the available databases, use the helper show dbs
+show dbs;
+
+To switch databases, issue the use <db>
+use <db>
+
+To see the list of collections in the current database
+show collections
+
+use demo
+db.mycollection.insertOne({......});
+db.<collection>.find() -  method returns a cursor to the results; however, in the mongo shell, if the returned cursor is not assigned to a variable using the var keyword, then the cursor is automatically iterated up to 20 times to print up to the first 20 documents that match the query. The mongo shell will prompt Type it to iterate another 20 times.
+
+
+db.myCollection.find().pretty()
+
+
+quit/exit
+
+mongoimport --db blog --collection posts --file fileName.json
+
+mongorestrore dump
+
+
+Reference for mongo shell
+https://docs.mongodb.com/manual/reference/mongo-shell/
+
+mongo has documents -- BSON data types
+
+
+Mongo DB CRUD
+we work with global variable db
+use video;
+creates db in lazy fashion
+db.movies.insertOne({ "title": "Jaws", "year": 1975, "imdb": "tt0073195" });
+<unique _id is added>
+db.movies.insertOne({ "title": "Mad Max 2: The Road Warrior", "year": 1981, "imdb": "tt0082694" })
+db.movies.insertOne({ "title": "Raiders of the Lost Ark", "year": 1981, "imdb": "tt0082971" })
+
+
+
+
+
+
+
+
+

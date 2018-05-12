@@ -37,8 +37,11 @@ whereas NoSQL databases are document based, key-value pairs, graph databases or 
 SQL databases have predefined schema 
 whereas NoSQL databases have dynamic schema for unstructured data.
 
-SQL databases are vertically scalable whereas the NoSQL databases are horizontally scalable. 
-SQL databases are scaled by increasing the horse-power of the hardware. NoSQL databases are scaled by increasing the databases servers in the pool of resources to reduce the load.
+SQL databases are vertically scalable 
+whereas the NoSQL databases are horizontally scalable. 
+
+SQL databases are scaled by increasing the horse-power of the hardware. 
+NoSQL databases are scaled by increasing the databases servers in the pool of resources to reduce the load.
 
 SQL databases uses SQL ( structured query language ) for defining and manipulating the data, which is very powerful. 
 In NoSQL database, queries are focused on collection of documents. Sometimes it is also called as UnQL (Unstructured Query Language). The syntax of using UnQL varies from database to database.
@@ -50,7 +53,9 @@ For complex queries: SQL databases are good fit for the complex query intensive 
 whereas NoSQL databases are not good fit for complex queries. 
 On a high-level, NoSQL don’t have standard interfaces to perform complex queries, and the queries themselves in NoSQL are not as powerful as SQL query language.
 
-For the type of data to be stored: SQL databases are not best fit for hierarchical data storage. But, NoSQL database fits better for the hierarchical data storage as it follows the key-value pair way of storing data similar to JSON data. NoSQL database are highly preferred for large data set (i.e for big data). Hbase is an example for this purpose.
+For the type of data to be stored: SQL databases are not best fit for hierarchical data storage. 
+But, NoSQL database fits better for the hierarchical data storage as it follows the key-value pair way of storing data similar to JSON data. 
+NoSQL database are highly preferred for large data set (i.e for big data).
 
 For scalability: In most typical situations, SQL databases are vertically scalable. You can manage increasing load by increasing the CPU, RAM, SSD, etc, on a single server. 
 On the other hand, NoSQL databases are horizontally scalable. You can just add few more servers easily in your NoSQL database infrastructure to handle the large traffic.

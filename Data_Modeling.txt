@@ -1,0 +1,39 @@
+
+Data Modeling
+RDBMS
+	posts
+	authors
+	comments
+	post_comments
+	tags
+	posts_tags
+
+MongoDB
+	posts
+		comments
+		tags
+		author
+	authors
+
+6 tables vs 2 collections
+
+Schema Design
+RDMS - 3NF
+
+MongoDB
+	Embed or Not
+
+	Access same time by the application
+	Its existance is dependant on the parent existance
+	MongoDB cannot be more than 16MB, so if document gets greater than 16MB move to different collection
+	
+	
+
+1. Rich Document
+2. Pre Joined data for faster access / Embeded Data
+3. No Joins
+4. No Constraints
+5. Atomic Operations
+6. No Transactions
+7. No Declared Schema
+8. Similar structure

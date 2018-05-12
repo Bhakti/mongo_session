@@ -1,0 +1,19 @@
+* Create a account on mongo atlas
+https://docs.mongodb.com/manual/tutorial/atlas-free-tier-setup/#create-free-tier-manual
+
+
+* Login to existing atlas
+https://cloud.mongodb.com/user#/atlas/login
+bhaktiapradhan@gmail.com
+*********
+
+
+* Connect to mongo atlas via mongo shell
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/test?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl --username m001-student --password m001-mongodb-basics
+mongo "mongodb://sandbox-shard-00-00-ts3gl.mongodb.net:27017,sandbox-shard-00-01-ts3gl.mongodb.net:27017,sandbox-shard-00-02-ts3gl.mongodb.net:27017/test?replicaSet=Sandbox-shard-0" --ssl --authenticationDatabase admin --username m001-student --password m001-mongodb-basics
+
+Aggregator Framework
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc
+ 
+
+
