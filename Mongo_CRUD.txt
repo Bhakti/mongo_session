@@ -1,0 +1,68 @@
+Creating Documents
+
+https://docs.mongodb.com/manual/reference/mongo-shell/
+
+insertOne with id
+insertOne without id
+insertMany
+
+show duplicate insert error
+
+
+db.collection.drop();
+
+ordered : false/true - insert once dont fail -- insert others
+
+update command - upserts means insert when update query doesnt find a match for update
+
+_id -- primary key
+mongo db create _id -
+each collection has primary index on _id
+
+ObjectId
+Date|Mac_Addr|PID|Counter
+----|---|--|---
+12 bytes
+
+Reading Documents
+	scalars
+	embeded docs
+	array
+
+mongorestore dump
+
+db.movieDetails.find({"rated" : "PG-13"}).count();
+
+searching embeded doc value
+	use dot notation
+
+db.movieDetails.find({"tomato.meter" : "100"}).count();
+
+nested document are searched using same number of .s 
+
+equality matches on array
+ - on entire array
+ -- order of element maters
+	db.movieDetails.find({"actors" : ["Jeff Bridges"]});
+ 
+ - matches atleast one element in array
+	db.movieDetails.find({"actors" : "Jeff Bridges"});
+	
+ - match specific element 
+	db.movieDetails.find({"actors.0" : "Jeff Bridges"});
+	
+cursors
+projections
+	reduce size of response
+	
+
+	db.movieDetails.find({"actors" : ["Jeff Bridges"]}, { "title":1, "_id":0});
+ 
+Comparsion Operators
+https://docs.mongodb.com/manual/reference/operator/query/
+
+
+
+
+ 
+ 

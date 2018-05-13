@@ -1,0 +1,158 @@
+Aggregation Framework
+
+group by 
+
+calcualte sum
+
+Query Operators can be used for CRUD
+https://docs.mongodb.com/manual/reference/operator/query/
+
+Comparision Query Operators
+db.movieDetails.find({runtime: {$gt: 90}})
+
+db.movieDetails.find({runtime: {$gt: 90}}, {_id: 0, title: 1, runtime: 1})
+
+db.movieDetails.find({runtime: {$gt: 90, $lt: 120}}, {_id: 0, title: 1, runtime: 1})
+
+db.movieDetails.find({runtime: {$gte: 90, $lte: 120}}, {_id: 0, title: 1, runtime: 1})
+
+db.movieDetails.find({runtime: {$gte: 180}, "tomato.meter": 100}, {_id: 0, title: 1, runtime: 1})
+
+db.movieDetails.find({rated: {$ne: "UNRATED"}}, {_id: 0, title: 1, rated: 1})
+
+db.movieDetails.find({rated: {$in: ["G", "PG"]}}, {_id: 0, title: 1, rated: 1})
+
+db.movieDetails.find({rated: {$in: ["G", "PG", "PG-13"]}}, {_id: 0, title: 1, rated: 1}).pretty()
+
+db.movieDetails.find({rated: {$in: ["R", "PG-13"]}}, {_id: 0, title: 1, rated: 1}).pretty()
+
+
+db.movieDetails.find({writers: {$in: ["Ethan Coen","Joel Coen"]}}, {_id: 0, title: 1, writers: 1})
+
+Element Operators
+$exists
+$type
+db.moviesDetails.find({mpaaRating: {$exists: true}})
+
+db.moviesDetails.find({mpaaRating: {$exists: false}})
+
+db.movieDetails.find({mpaaRating: null})
+
+db.movieDetails.find({})
+
+db.movies.find({viewerRating: {$type: "int"}}).pretty()
+
+db.movies.find({viewerRating: {$type: "double"}}).pretty()
+
+
+Logical Operators
+$and
+$or
+$nor
+$not
+
+db.movieDetails.find({$or: [{"tomato.meter": {$gt: 95}},                               
+                            {"metacritic": {$gt: 88}}]},
+                     {_id: 0, title: 1, "tomato.meter": 1, "metacritic": 1})
+
+db.movieDetails.find({$and: [{"tomato.meter": {$gt: 95}},                               
+                            {"metacritic": {$gt: 88}}]},
+                     {_id: 0, title: 1, "tomato.meter": 1, "metacritic": 1})
+
+db.movieDetails.find({"tomato.meter": {$gt: 95},                               
+                      "metacritic": {$gt: 88}},
+                     {_id: 0, title: 1, "tomato.meter": 1, "metacritic": 1})
+
+db.movieDetails.find({$and: [{"metacritic": {$ne: null}},
+                             {"metacritic": {$exists: true}}]},
+                          {_id: 0, title: 1, "metacritic": 1})
+
+db.movieDetails.find({$and: [{"metacritic": null},
+                             {"metacritic": {$exists: true}}]},
+                     {_id: 0, title: 1, "metacritic": 1})
+
+
+					 db.shipwrecks.find({$or: [{"watlev": {$eq: "always dry"}}, {"depth": {$eq :0}}]});
+					 
+					 
+db.data.find({sections: {$all: ["AG1", "MD1", "OA1"]}},                 {_id: 0, title: 1, sections: 1}).pretty()
+
+
+$elemmatch
+$all
+$size
+
+
+
+
+db.surveys.find({results: {$elemMatch: {"product": "abc", "score": 7}}})
+
+var pipeline = [
+    {
+        $match: {
+            $or: [
+                {
+                    $and: [
+                        { src_airport: 'JFK' }, { dst_airport: 'LHR' }
+                    ],
+                    $and: [
+                        { src_airport: 'LHR' }, { dst_airport: 'JFK' }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        $lookup: {
+            from: 'air_alliances',
+            localField: 'airline.name',
+            foreignField: 'airlines',
+            as: 'alliance'
+        }
+    }
+]
+
+
+var pipeline = [
+  {
+    "$sort": {"name": 1}
+  },
+  {
+    "$project": {"name":1,
+    "phone": {
+      "$concat": [
+        {"$arrayElemAt": [{"$split": ["$phone", " "]}, 0]} ,
+        "*********"  ]
+      },
+    "ssn": {
+      "$concat": [
+        "********",
+        {"$arrayElemAt": [{"$split": ["$ssn", "-"]}, 2]}
+      ]
+    }
+  }
+}
+];
+db.createView("people", "people_contacts" pipeline);
+
+var pipeline = [
+  {
+    "$sort": {"name": 1}
+  },
+  {
+    "$project": {"name":1,
+    "phone": {
+      "$concat": [
+        {"$arrayElemAt": [{"$split": ["$phone", " "]}, 0]} ,
+        "*********"  ]
+      },
+    "ssn": {
+      "$concat": [
+        "********",
+        {"$arrayElemAt": [{"$split": ["$ssn", "-"]}, 2]}
+      ]
+    }
+  }
+}
+];
+db.createView("people_contacts", "people", pipeline);

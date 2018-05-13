@@ -1,0 +1,453 @@
+MongoDB
+
+What is MongoDB
+MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need
+
+MongoDB stores data in flexible, JSON-like documents, meaning fields can vary from document to document and data structure can be changed over time
+
+The document model maps to the objects in your application code, making data easy to work with
+
+Ad hoc queries, indexing, and real time aggregation provide powerful ways to access and analyze your data
+
+MongoDB is a distributed database at its core, so high availability, horizontal scaling, and geographic distribution are built in and easy to use
+
+MongoDB is free and open-source, published under the GNU Affero General Public License
+
+
+> It is a Document Database
+> JSON is saved in MongoDB
+> Requires Minimal Joins
+
+What is mongo db
+it is a document database
+we use json / java script object notation
+
+development team can design data model as per data needed
+
+scaling
+scaling up - rdbms - multiple tables joins etc.....
+
+atomic read and write
+
+agile software
+
+sharding
+
+single node -- 100 of nodes
+
+joins or multiple table transactions
+
+
+BSON
+
+mongo db driver sends object as BSON
+-lightweight, efficent, travesable
+
+
+
+mongorestrore dump
+mongoimport --drop -d students -c grades grades.json
+
+
+db.grades.aggregate([{'$group':{'_id':'$student_id', 'average':{$avg:'$score'}}}, {'$sort':{'average':-1}}, {'$limit':1}])
+
+score gt equal to 65 exam sort and which has lowest score
+
+
+db.grades.find({"type":"exam", "score": {$gte:65}}).count();
+
+
+comaparators
+
+
+db.grades.find( { score : { $gte : 65 } } ).sort( { score : 1 } )
+
+Comparison Operators
+Element Operators
+$exists
+$type
+
+Logical Operators
+$or
+$and
+$nor
+
+db.movieDetails.find({ boxOffice: { country: "UK", revenue: { $gt: 15 } } })
+
+db.movieDetails.find({ "boxOffice.country": "UK", "boxOffice.revenue": { $gt: 15 } } )
+
+
+updateOne
+
+
+In this course we will make extensive use of MongoDB Compass for learning how to use MongoDB.
+
+Please download Compass from the MongoDB Download Center. If you downloaded Compass before today, please make sure you are using version 1.8 or later and upgrade if necessary.
+Install Compass on your computer from the download.
+Launch Compass.
+When Compass opens you will see a page titled "Connect to Host".
+
+
+Hostname: cluster0-shard-00-00-jxeqq.mongodb.net
+
+Username: m001-student
+
+Password: m001-mongodb-basics
+
+Replica Set Name: Cluster0-shard-0
+
+Read Preference: Primary Preferred
+
+Use the following information to complete this form, but do not click "Connect" yet.
+
+Hostname: cluster0-shard-00-00-jxeqq.mongodb.net
+
+Username: m001-student
+
+Password: m001-mongodb-basics
+
+Replica Set Name: Cluster0-shard-0
+
+Read Preference: Primary Preferred
+
+Click "Add to Favorites" and enter M001 RS as the Favorite Name. Adding this connection as a favorite will enable you to easily connect to our class MongoDB deployment after closing and restarting Compass at some point in the future.
+
+Now, click "Connect" and load the databases in the M001 class MongoDB deployment.
+
+
+
+http://tapanksahu.blogspot.in/2017/08/m001-mongodb-basics-q-quiz-labs-final.html
+https://github.com/mongodb/m001
+
+
+Application Driven Schema vs 3rd Normal Format
+1. Rich Document
+2. Pre Joined data for faster access / Embeded Data
+3. No Joins
+4. No Constraints
+5. Atomic Operations
+6. No Transactions
+7. No Declared Schema
+8. Similar structure
+
+
+
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/test?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl --username m001-student --password m001-mongodb-basics
+
+
+mongo "mongodb://sandbox-shard-00-00-ts3gl.mongodb.net:27017,sandbox-shard-00-01-ts3gl.mongodb.net:27017,sandbox-shard-00-02-ts3gl.mongodb.net:27017/test?replicaSet=Sandbox-shard-0" --ssl --authenticationDatabase admin --username m001-student --password m001-mongodb-basics
+
+
+
+the minimum record space in MongoDB 3.0 is 32 bytes.
+
+
+he correct answers are:
+
+MMAPv1 automatically allocates power-of-two-sized documents when new documents are inserted
+This is handled by the storage engine.
+MMAPv1 is built on top of the mmap system call that maps files into memory
+This is the basic idea behind why we call it MMAPv1.
+Wrong ones are:
+
+MMAPv1 offers document-level locking
+It has collection level locking.
+MongoDB manages the memory used by each mapped file, deciding which parts to swap to disk.
+The operating system handles this.
+
+
+mongod --storageEngine wiredTiger
+Document level concurrency
+Compresssion of data and indexes
+Append only
+updates are inserted at end marking old one as unused
+unused is reclaimed later
+
+db.foo.stats();
+
+
+In this video, Andrew mentions that while reads are much faster with indexes, writes to a document will happen slower. This is true, but it's worth noting a caveat here: combination operations, such as update and deletion operations, where you find the document you want and then perform a write, will benefit from the index when you're performing the query stage, and then may be slowed by the index when you perform the write. Usually you're still better off having an index, but there are some special cases where this may not be true.
+
+He mentions that indexes in mongodb are in btrees. This is true for MMAP (and therefore for MongoDB prior to 3.0), but it does depend on your storage engine. For example, when you are using WiredTiger, as of MongoDB 3.0, indexes are implemented in b+trees. Again, you can find details in Wikipedia (links provided here for your convenience).
+
+
+db.students.createIndex({"student_id": 1, "class" : 1});
+db.students.getIndexs();
+db.students.dropIndex({"student_id": 1});
+
+multi key index
+key as array
+
+two keys cant be with value array when we create multi key indexes, i.e. both cant be arrays
+it remain multikey even if data is removed
+initially if data is scalar multiKey is false, but when we put data with array it become true for multikey
+
+dot notation and multi keys
+scores.score:1
+
+
+$elemMatch
+
+db.people.createIndex({"scores.score" : -1});
+
+Unique indexes
+
+no two documents have same key
+db.stuff.createIndex({thing:1}, {unique:true});
+db.stuff.remove({thing:"apple"}, {justOne:true});
+db.stuff.getIndexes()
+
+
+Indexes Sparse
+
+
+index creation
+foreground vs background
+fast, blocks writes and readers in the database
+slow, doesnt blocks writes and readers - better way in prod
+
+ creating an index in the background on the primary will cause the indexes to be created in the background on secondaries, as well. The secondaries will begin index creation when the primary completes building its index.
+ 
+ explain
+ verbosity
+ 
+ 
+ 
+ Aggregator Framework
+ mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc
+ 
+ 
+Concepts of pipelines
+Stations / Stages
+	$match
+	$project
+	$group
+
+Aggregation Structure and Syntax
+db.collection.aggregate([{
+$match :{}
+},{
+$project : {}
+}, {
+}], {});
+
+
+Example
+db.solarSystem.aggregate([{
+  "$match": {
+    "atmosphericComposition": { "$in": [/O2/] },
+    "meanTemperature": { $gte: -40, "$lte": 40 }
+  }
+}, {
+  "$project": {
+    "_id": 0,
+    "name": 1,
+    "hasMoons": { "$gt": ["$numberOfMoons", 0] }
+  }
+}], { "allowDiskUse": true});
+
+
+$match
+match is like a filter some document pass thru
+uses standard mongo query operators
+
+https://docs.mongodb.com/manual/reference/operator/aggregation/match/
+
+$match uses the MongoDB query language query operators to express queries.
+
+It should come very early in an aggregation pipeline.
+
+
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/test?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl --username m001-student --password m001-mongodb-basics
+
+db.movies.find({"$and" : [{"cast" : {"$in" : ["Jack Nicholson", "John Huston"]}}, {"viewerRating": {$gt:7}}, {"mpaaRating":"R"}]});
+
+
+
+db.products.aggregate([{
+	"$group": { "_id": "$category", "num_products" : {$sum: 1}}
+}])
+
+
+$sum
+$avg
+$min
+$max
+$push
+$addToSet
+
+$first
+$last
+
+
+mongoimport --db agg --collection zips --drop --file zips.json
+
+
+db.zips.aggregate([{"$group":{"_id":"$state", "average_pop":{$avg:"$pop"}}}])
+
+
+use agg
+db.zips.aggregate([{$group: {_id: {"state":"$state"},average_pop:{$avg:"$pop"}}}])
+
+use agg
+db.zips.aggregate([{$group:{_id: "$city" ,postal_codes:{$addToSet:"$_id"}}}])
+
+use agg
+db.products.aggregate([{$group:{_id: "$city", categories:{$push:"$category"} } }])
+
+db.zips.aggregate([{$group:{_id: "$state" ,pop:{$max:"$pop"}}}])
+
+db.fun.aggregate([{$group:{_id:{a:"$a", b:"$b"}, c:{$max:"$c"}}}, {$group:{_id:"$_id.a", c:{$min:"$c"}}}])
+
+
+db.zips.aggregate([{$project:{_id:0, city:{$toLower:"$city"}, pop:"$pop", state:"$state", zip:"$_id"}}])
+
+db.posts.aggregate([{"$project" : {_id:0, author: "$comments.author"}},{$unwind: "$author"},{"$group":{"_id":"$author", "comments":{$sum:1}}}, {"$sort" : {"comments":-1}}])
+
+
+,{$group:{_id: "$state" ,pop:{$sum:"$pop"}}}
+
+db.zips.aggregate([{$match : {state : {"$in" : ["CA","NY"]}}}, {$group:{_id: {"city":"$city","state":"$state"} ,pop:{$sum:"$pop"}}},{$match : {pop : {"$gt" : 25000}}},{ $group: { _id: null, avg: { $avg: "$pop" } } }])
+
+db.grades.aggregate([{ $unwind: "$scores" },{ $match: {"scores.type": { $in: ["exam", "homework"] } } },{ $group: { _id: { student_id: "$student_id", class_id: "$class_id" },student_avg: { $avg: "$scores.score" } } },{ $group: { _id:"$_id.class_id", class_avg: { $avg: "$student_avg" } } }, { $sort: { class_avg: -1 } }, { $limit: 1 }])
+
+
+db.zips.aggregate([
+    {$project:
+     {
+    first_char: {$substr : ["$city",0,1]},
+	pop:1,
+	city:1,
+	zip_code:"$_id"
+     }
+   },
+   {
+	$match: {first_char : {$in : ["B", "D", "O", "G", "N", "M"]}}
+   },
+   {
+	$group : {_id : null, pop: {$sum: "$pop"}}
+   }
+])
+
+
+
+
+
+db.movies.aggregate([
+    {
+        $match: {
+            'awards': /Won.\d*.[oO]scars?/
+        }
+    },
+    {
+        $group: {
+            _id: null,
+            highest_rating: { $max: '$imdb.rating' },
+            lowest_rating: { $min: '$imdb.rating' },
+            average_rating: { $avg: '$imdb.rating' },
+            deviation: { $stdDevSamp: '$imdb.rating' }
+        }
+    }
+]);
+
+db.movies.aggregate([
+	{ 
+		$match : {languages : {$in : ["English"]}, 'imdb.rating': { $gte: 0 }}
+	},
+    {
+        $unwind: "$cast"
+    },
+	{ 
+		$group: {
+			_id:"$cast",
+			"numFilms" : {$sum: 1},
+			"average" : { $avg: '$imdb.rating' }
+			
+		}
+	},
+	{
+		$sort : { numFilms : -1}
+	}
+	,
+    {
+        $limit: 1
+    },
+	{
+        $project: {
+            average: { $divide: [{ $trunc: { $multiply: ['$average', 10] } }, 10] },
+            numFilms: 1
+        }
+    }
+]);
+
+
+db.air_alliances.aggregate([
+	{
+        $unwind: '$airlines'
+    },
+	{
+        $lookup: {
+            from: 'air_routes',
+            localField: 'airlines',
+            foreignField: 'airline.name',
+            as: 'routes'
+        }
+    },
+    {
+        $unwind: '$routes'
+    },
+	{ $match : { "routes.airplane" : { $in : [ "747", "380" ] } } },
+	{ $group : {
+		"_id" : "$name",
+		"routes_count" : { $sum : 1 } 
+	    }
+	},
+	{ $sort : {"routes_count" : -1 } }
+	
+	])
+	
+;
+	
+	
+	db.air_alliances.aggregate([{$match: { name: "OneWorld" }},
+{$graphLookup: {startWith: "$airlines",from: "air_airlines",connectFromField: "name",connectToField: "name",as: "airlines",maxDepth: 0,
+restrictSearchWithMatch: {country: { $in: ["Germany", "Spain", "Canada"] }}}
+},
+{$graphLookup: {startWith: "$airlines.base",from: "air_routes",connectFromField: "dst_airport",connectToField: "src_airport",as: "connections",maxDepth: 1}
+},
+{$project: {validAirlines: "$airlines.name","connections.dst_airport": 1,"connections.airline.name": 1}},
+{ $unwind: "$connections" },
+{$project: {isValid: { $in: ["$connections.airline.name", "$validAirlines"] },"connections.dst_airport": 1}},
+{ $match: { isValid: true } },
+{ $group: { _id: "$connections.dst_airport" } },
+{ $group: { _id: null, count: {$sum:1 } }
+]);
+
+
+db.movies.aggregate([{$stage1},{$stage2},{...$stageN},]).itcount()
+
+
+
+db.movies.aggregate([
+{ $match : {  "imdb.rating" : { $gt : 0 },  "metacritic" : { $gt : 0 }	}	},
+{ $facet : {"topTenImdb" : [{ $sort : { "imdb.rating" : -1 } },{ $limit : 10 }], "topTenMetacritic" : [{ $sort : { "metacritic" : -1 } },{ $limit : 10 } ]}},
+{$project : {"commonTopFilms" : {$size : {$setIntersection : [ "$topTenImdb", "$topTenMetacritic" ]}}}}]);
+
+
+$redact
+
+desend
+prume
+keep
+
+
+https://github.com/aurasphere/mongodb-university-classes
+https://www.slideshare.net/zag77/nosql-and-mongodb-94668435?qid=c9e4092c-1db0-427a-901d-7c683455604f&v=&b=&from_search=4
+https://www.mongodb.com/presentations/when-to-use-mongodb-and-when-you-should-not
+
+mongoimport --db blog --collection posts --file fileName.json
+
+
+
+
+https://www.slideshare.net/skondla/setting-up-mongodb-sharded-cluster-in-30-minutes

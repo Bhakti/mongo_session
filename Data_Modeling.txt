@@ -1,3 +1,19 @@
+Schema Design
+RDMS - 3NF
+
+1. Rich Document
+2. Pre Joined data for faster access / Embeded Data
+3. No Joins
+4. No Constraints
+5. Atomic Operations
+6. No Transactions
+7. No Declared Schema
+8. Similar structure
+
+
+Develop schema which suits application access pattern
+
+mongodb support rich data patterns
 
 Data Modeling
 RDBMS
@@ -17,23 +33,11 @@ MongoDB
 
 6 tables vs 2 collections
 
-Schema Design
-RDMS - 3NF
+mongorestrore dump
+mongoimport --drop -d students -c grades grades.json
 
 MongoDB
 	Embed or Not
-
-	Access same time by the application
-	Its existance is dependant on the parent existance
-	MongoDB cannot be more than 16MB, so if document gets greater than 16MB move to different collection
-	
-	
-
-1. Rich Document
-2. Pre Joined data for faster access / Embeded Data
-3. No Joins
-4. No Constraints
-5. Atomic Operations
-6. No Transactions
-7. No Declared Schema
-8. Similar structure
+		Access same time by the application
+		Its existance is dependant on the parent existance
+		MongoDB cannot be more than 16MB, so if document gets greater than 16MB move to different collection
