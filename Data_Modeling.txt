@@ -33,11 +33,95 @@ MongoDB
 
 6 tables vs 2 collections
 
-mongorestrore dump
-mongoimport --drop -d students -c grades grades.json
+
+
+Embeded example
+book = {
+    title: "MongoDB: The Definitive Guide",
+    authors: [ "Kristina Chodorow", "Mike Dirolf" ]
+    published_date: ISODate("2010-09-24"),
+    pages: 216,
+    language: "English",
+    publisher: {
+        name: "O’Reilly Media",
+        founded: "1980",
+        location: "CA"
+    }
+}
+
+Linked Example
+publisher = {
+    _id: "oreilly",
+    name: "O’Reilly Media",
+    founded: "1980",
+    location: "CA"
+}
+book = {
+    title: "MongoDB: The Definitive Guide",
+    authors: [ "Kristina Chodorow", "Mike Dirolf" ]
+    published_date: ISODate("2010-09-24"),
+    pages: 216,
+    language: "English",
+    publisher_id: "oreilly"
+}
+
 
 MongoDB
 	Embed or Not
 		Access same time by the application
 		Its existance is dependant on the parent existance
 		MongoDB cannot be more than 16MB, so if document gets greater than 16MB move to different collection
+
+mongorestrore dump
+mongoimport --drop -d blog -c posts posts.json
+
+improved read 
+
+
+zip = {
+ _id: 35004,
+city: “ACMAR”,
+ loc: [-86, 33],
+pop: 6065,
+State: “AL”
+}
+
+person = {
+zip_id = 35004,
+name: “John Doe",
+address: “123 Fake St.”,
+Phone: 123456
+}
+
+zip = {
+ _id: 35004 ,
+city: “ACMAR”
+ loc: [-86, 33],
+ pop: 6065,
+ State: “AL”,
+
+ person: {
+ name: “John Doe",
+ address: “123 Fake St.”,
+ Phone: 123456
+}
+}
+
+book = {
+    title: "MongoDB: The Definitive Guide",
+    authors : [
+        { _id: "kchodorow", name: "Kristina Chodorow” }, 
+        { _id: "mdirolf", name: "Mike Dirolf” }
+    ]
+    published_date: ISODate("2010-09-24"),
+    pages: 216,
+    language: "English"
+}
+
+author = { 
+    _id: "kchodorow",
+    name: "Kristina Chodorow",
+    hometown: "New York"
+}
+
+db.books.find( { authors.name : "Kristina Chodorow" } )

@@ -1,0 +1,9 @@
+Storage Engines
+Pluggable storage engines were introduced in MongoDB 3.0
+In MongoDB 3.2, WiredTiger became the default storage engine.
+
+MMAP
+	
+
+WiredTiger
+

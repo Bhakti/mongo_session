@@ -26,6 +26,8 @@ To display the database you are using, type db:
 db
 default connects to test
 
+db.stats()
+
 To list the available databases, use the helper show dbs
 show dbs;
 
