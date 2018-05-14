@@ -1,5 +1,42 @@
+Spin up a NoSQL cluster in minutes with the MongoDB Atlas: Hosted Database as a Service
+It is easiest way to start learning and prototyping applications on MongoDB.
+
+Launching an application on any database typically requires careful planning to ensure performance, high availability, security, and disaster recovery – and these obligations continue as long as you run the application. 
+With MongoDB Atlas, you receive all of the features of MongoDB without any of the operational heavy lifting, allowing you to focus instead on learning and building your apps. 
+
+Features include:
+	On-demand, pay as you go model
+	Seamless upgrades and auto-healing
+	Fully elastic. Scale up and down with ease
+	Deep monitoring & customizable alerts
+	Highly secure by default
+	Continuous backups with point-in-time recovery
+
+
 * Create a account on mongo atlas
 https://docs.mongodb.com/manual/tutorial/atlas-free-tier-setup/#create-free-tier-manual
+Create an Atlas user account.
+Create an Atlas Organization.
+	Organizations are top-level hierarchy structures. You configure alerts and billing for paid clusters at the organization level, and all projects and clusters part of that organization inherit those settings.
+	
+Create an Atlas Project
+	Projects manage related MongoDB deployments, or “clusters” in Atlas. An organization can contain multiple projects
+	Add Members to the Project
+
+Create a cluster.	
+	MongoDB clusters can be either a replica set or a sharded cluster. To create a cluster, go to the Clusters view and click the Build a New Cluster button.
+		Enter a Cluster Name.
+		Select Amazon Web Services as the Cloud Provider.
+		For Region, chose either US-EAST-1 or EU-CENTRAL-1.
+		Click the Select button for Instance Size M0 for Atlas Free Tier.
+		Click Confirm & Deploy.
+		
+Setup security
+	Atlas only allows client connections to the cluster from entries in the projects’s whitelist. To add an entry to the whitelist:
+	Click the Security tab from the Clusters view.
+Click IP Whitelist, then Add IP Address. You may either enter the IP address manually in the Whitelist Entry field or click the Add Current IP Address button.
+Click Confirm and wait for Atlas to update the firewall.
+	
 
 
 * Login to existing atlas

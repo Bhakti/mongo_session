@@ -1,9 +1,8 @@
 Mongo DB Notes
-
+What is MongoDB
 MongoDB is a free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemas. MongoDB is developed by MongoDB Inc., and is published under a combination of the GNU Affero General Public License and the Apache License.
 
 
-What is MongoDB
 MongoDB is a document database with the scalability and flexibility that you want with the querying and indexing that you need
 
 MongoDB stores data in flexible, JSON-like documents, meaning fields can vary from document to document and data structure can be changed over time
@@ -14,20 +13,8 @@ Ad hoc queries, indexing, and real time aggregation provide powerful ways to acc
 
 MongoDB is a distributed database at its core, so high availability, horizontal scaling, and geographic distribution are built in and easy to use
 
-MongoDB is free and open-source, published under the GNU Affero General Public License
-
-
-> It is a Document Database
-> JSON is saved in MongoDB
-> Requires Minimal Joins
-
-What is mongo db
-it is a document database
-we use json / java script object notation
-
-development team can design data model as per data needed
-
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Difference b/w SQL and NoSQL
 SQL databases are primarily called as Relational Databases (RDBMS); 
 whereas NoSQL database are primarily called as non-relational or distributed database.
 
@@ -35,13 +22,14 @@ SQL databases are table based databases
 whereas NoSQL databases are document based, key-value pairs, graph databases or wide-column stores.
 
 SQL databases have predefined schema 
+	Structure and data types are fixed in advance. To store information about a new data item, the entire database must be altered, during which time the database must be taken offline.
 whereas NoSQL databases have dynamic schema for unstructured data.
+	Typically dynamic, with some enforcing data validation rules. Applications can add new fields on the fly, and unlike SQL table rows, dissimilar data can be stored together as necessary. For some databases (e.g., wide-column stores), it is somewhat more challenging to add new fields dynamically.
 
-SQL databases are vertically scalable 
-whereas the NoSQL databases are horizontally scalable. 
-
-SQL databases are scaled by increasing the horse-power of the hardware. 
-NoSQL databases are scaled by increasing the databases servers in the pool of resources to reduce the load.
+SQL databases are vertically scalable. SQL databases are scaled by increasing the horse-power of the hardware. 
+whereas the NoSQL databases are horizontally scalable. NoSQL databases are scaled by increasing the databases servers in the pool of resources to reduce the load.
+For scalability: In most typical situations, SQL databases are vertically scalable. You can manage increasing load by increasing the CPU, RAM, SSD, etc, on a single server. 
+On the other hand, NoSQL databases are horizontally scalable. You can just add few more servers easily in your NoSQL database infrastructure to handle the large traffic.
 
 SQL databases uses SQL ( structured query language ) for defining and manipulating the data, which is very powerful. 
 In NoSQL database, queries are focused on collection of documents. Sometimes it is also called as UnQL (Unstructured Query Language). The syntax of using UnQL varies from database to database.
@@ -51,14 +39,12 @@ NoSQL database examples: MongoDB, BigTable, Redis, RavenDb, Cassandra, Hbase, Ne
 
 For complex queries: SQL databases are good fit for the complex query intensive environment 
 whereas NoSQL databases are not good fit for complex queries. 
-On a high-level, NoSQL don’t have standard interfaces to perform complex queries, and the queries themselves in NoSQL are not as powerful as SQL query language.
+On a high-level, NoSQL don’t have standard interfaces to perform complex queries, 
+and the queries themselves in NoSQL are not as powerful as SQL query language.
 
 For the type of data to be stored: SQL databases are not best fit for hierarchical data storage. 
 But, NoSQL database fits better for the hierarchical data storage as it follows the key-value pair way of storing data similar to JSON data. 
 NoSQL database are highly preferred for large data set (i.e for big data).
-
-For scalability: In most typical situations, SQL databases are vertically scalable. You can manage increasing load by increasing the CPU, RAM, SSD, etc, on a single server. 
-On the other hand, NoSQL databases are horizontally scalable. You can just add few more servers easily in your NoSQL database infrastructure to handle the large traffic.
 
 For high transactional based application: SQL databases are best fit for heavy duty transactional type applications, as it is more stable and promises the atomicity as well as integrity of the data. 
 While you can use NoSQL for transactions purpose, it is still not comparable and sable enough in high load and for complex transactional applications.
@@ -69,12 +55,12 @@ For some NoSQL database you still have to rely on community support, and only li
 For properties: SQL databases emphasizes on ACID properties ( Atomicity, Consistency, Isolation and Durability) 
 whereas the NoSQL database follows the Brewers CAP theorem ( Consistency, Availability and Partition tolerance )
 
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 NoSQL encompasses a wide variety of different database technologies that were developed in response to the demands presented in building modern applications:
 
-Developers are working with applications that create massive volumes of new, rapidly changing data types — structured, semi-structured, unstructured and polymorphic data.
-
 Long gone is the twelve-to-eighteen month waterfall development cycle. Now small teams work in agile sprints, iterating quickly and pushing code every week or two, some even multiple times every day.
+
+Developers are working with applications that create massive volumes of new, rapidly changing data types — structured, semi-structured, unstructured and polymorphic data.
 
 Applications that once served a finite audience are now delivered as services that must be always-on, accessible from many different devices and scaled globally to millions of users.
 
