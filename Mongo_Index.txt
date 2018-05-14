@@ -1,9 +1,83 @@
 Storage Engines
 Pluggable storage engines were introduced in MongoDB 3.0
 In MongoDB 3.2, WiredTiger became the default storage engine.
-
 MMAP
-	
-
 WiredTiger
 
+Now lets talk about indexes and its effect on query performance
+If no indexes, find doc with x, imagine engine needs to scan all the documents -- death to performance.
+
+Index is ordered list of things
+ 
+Creating Indexes
+Get Indexes
+	db.collection.getIndexes();
+Deleting Indexes
+	db.collection.dropIndex(....);
+MultiKey Indexes
+	Creating index on array are called multiKey indexes
+	you cannot create combination of two array fields
+	
+	1. db.foo.insert({a:1,b:2});
+	2. db.foo.createIndex({a:1,b:1});
+	3. db.foo.explain().find({a:3});
+	4. db.foo.insert({a:3,b:[19,11,2]);
+	5. db.foo.explain().find({a:3});
+	
+	
+	post deleting document with arrays
+	
+	error for two arrays inserted 
+
+Dot Notation and MultiKey Indexes
+	Combining multiKey and dot notation
+	db.students.findOne();
+	
+Unique Index
+Sparse Index
+
+
+	
+
+
+while reads are much faster with indexes, writes to a document will happen slower.
+
+db.students.createIndex({"student_id": 1, "class" : 1});
+db.students.getIndexs();
+db.students.dropIndex({"student_id": 1});
+
+multi key index
+key as array
+
+two keys cant be with value array when we create multi key indexes, i.e. both cant be arrays
+it remain multikey even if data is removed
+initially if data is scalar multiKey is false, but when we put data with array it become true for multikey
+
+dot notation and multi keys
+scores.score:1
+
+
+$elemMatch
+
+db.people.createIndex({"scores.score" : -1});
+
+Unique indexes
+
+no two documents have same key
+db.stuff.createIndex({thing:1}, {unique:true});
+db.stuff.remove({thing:"apple"}, {justOne:true});
+db.stuff.getIndexes()
+
+
+Indexes Sparse
+
+
+index creation
+foreground vs background
+fast, blocks writes and readers in the database
+slow, doesnt blocks writes and readers - better way in prod
+
+creating an index in the background on the primary will cause the indexes to be created in the background on secondaries, as well. The secondaries will begin index creation when the primary completes building its index.
+ 
+explain
+verbosity

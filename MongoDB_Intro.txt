@@ -68,39 +68,17 @@ Organizations are now turning to scale-out architectures using open source softw
 
 Relational databases were not designed to cope with the scale and agility challenges that face modern applications, nor were they built to take advantage of the commodity storage and processing power available today.
 
-
-Factors Driving Modern Applications
-Mobile
-	2 Billion smartphones in 2015
-	Mobile now>50% internet use
-	26 billion IOT devices yby 2020
-	
-Social
- 72% of internet use is social media
- 2 billion active users monthly
- 93% of business use social media
- 
-Data
-	90% data created in last 2 years
-	80% enterprise data is unstructured
-	unstructured data is growing 2X rate of structured data
-
-Cloud
-	Compute Costs decling 
-	Storage cost decling
-	network cost decling
-
  
  
- https://www.mongodb.com/nosql-explained
+https://www.mongodb.com/nosql-explained
  
- Key Features
+Key Features
 High Performance
 	MongoDB provides high performance data persistence. In particular,
 	Support for embedded data models reduces I/O activity on database system.
 	Indexes support faster queries and can include keys from embedded documents and arrays.
 
-	Rich Query Language
+Rich Query Language
 	MongoDB supports a rich query language to support read and write operations (CRUD) as well as:
 
 Data Aggregation
@@ -115,7 +93,7 @@ A replica set is a group of MongoDB servers that maintain the same data set, pro
 Horizontal Scalability
 	MongoDB provides horizontal scalability as part of its core functionality:
 
-	Sharding distributes data across a cluster of machines.
+Sharding distributes data across a cluster of machines.
 	Starting in 3.4, MongoDB supports creating zones of data based on the shard key. In a balanced cluster, MongoDB directs reads and writes covered by a zone only to those shards inside the zone. See the Zones manual page for more information.
 
 Support for Multiple Storage Engines
@@ -125,5 +103,3 @@ MongoDB supports multiple storage engines:
 	In-Memory Storage Engine
 	MMAPv1 Storage Engine
 In addition, MongoDB provides pluggable storage engine API that allows third parties to develop storage engines for MongoDB.
-
-

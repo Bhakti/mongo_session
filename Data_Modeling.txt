@@ -72,10 +72,8 @@ MongoDB
 		Its existance is dependant on the parent existance
 		MongoDB cannot be more than 16MB, so if document gets greater than 16MB move to different collection
 
-mongorestrore dump
-mongoimport --drop -d blog -c posts posts.json
 
-improved read 
+improved read, less db hits
 
 
 zip = {
@@ -125,3 +123,6 @@ author = {
 }
 
 db.books.find( { authors.name : "Kristina Chodorow" } )
+
+mongorestrore dump
+mongoimport --drop -d blog -c posts posts.json

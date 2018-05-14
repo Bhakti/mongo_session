@@ -1,13 +1,20 @@
 Creating Documents
+The _id field
+Reading Documents
+Comparison Operators
+Logical Operators
+Element Operators
+Regex Operators
+Array Operators
+Updating Documents
+
 
 https://docs.mongodb.com/manual/reference/mongo-shell/
-
 insertOne with id
 insertOne without id
 insertMany
 
 show duplicate insert error
-
 
 db.collection.drop();
 
@@ -30,7 +37,6 @@ Reading Documents
 	array
 
 mongorestore dump
-
 db.movieDetails.find({"rated" : "PG-13"}).count();
 
 searching embeded doc value
@@ -56,13 +62,27 @@ projections
 	reduce size of response
 	
 
-	db.movieDetails.find({"actors" : ["Jeff Bridges"]}, { "title":1, "_id":0});
+db.movieDetails.find({"actors" : ["Jeff Bridges"]}, { "title":1, "_id":0});
  
-Comparsion Operators
 https://docs.mongodb.com/manual/reference/operator/query/
 
-
-
-
  
- 
+score gt equal to 65 exam sort and which has lowest score
+db.grades.find({"type":"exam", "score": {$gte:65}})
+db.grades.find( { score : { $gte : 65 } } ).sort( { score : 1 } )
+
+comaparators
+Comparison Operators
+Element Operators
+$exists
+$type
+
+Logical Operators
+$or
+$and
+$nor
+
+db.movieDetails.find({ boxOffice: { country: "UK", revenue: { $gt: 15 } } })
+db.movieDetails.find({ "boxOffice.country": "UK", "boxOffice.revenue": { $gt: 15 } } )
+
+updateOne
