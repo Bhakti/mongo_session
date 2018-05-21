@@ -1,0 +1,152 @@
+11:30 - 1:00
+
+1. CRUD
+MongoDB use DATABASE_NAME is used to create database. The command will create a new database if it doesn't exist, otherwise it will return the existing database.
+
+CREATE DATABASE
+------------------
+create a database with name demo, then use DATABASE statement would be as follows −
+>use demo
+
+To check your currently selected database, use the command db
+db
+
+If you want to check your databases list, use the command show dbs.
+
+>show dbs
+
+Your created database demo is not present in list. To display database, you need to insert at least one document into it.
+
+>db.movie.insert({"name":"Avengers"})
+>show dbs
+
+In MongoDB default database is test.
+
+DELETE DATABASE
+------------------
+MongoDB db.dropDatabase() command is used to drop a existing database
+db.dropDatabase()
+
+>use demo
+switched to db demo
+>db.dropDatabase()
+>show dbs
+
+CREATE Collection
+------------------
+In MongoDB, you don't need to create collection. MongoDB creates collection automatically, when you insert some document.
+MongoDB db.createCollection(name, options) is used to create collection.
+
+
+db.createCollection("mycol", { capped : true, autoIndexId : true, size : 6142800, max : 10000 } )
+
+DELETE Collection
+------------------
+MongoDB's db.collection.drop() is used to drop a collection from the database.
+db.COLLECTION_NAME.drop()
+db.mycollection.drop()
+
+drop() method will return true, if the selected collection is dropped successfully, otherwise it will return false.
+
+INSERT INTO Collection
+----------------------
+To insert data into MongoDB collection, you need to use MongoDB's insert()
+>db.COLLECTION_NAME.insert(document)
+db.moviesScratch.insert(
+    [
+        {
+  	    "_id" : "tt0084726",
+  	    "title" : "Star Trek II: The Wrath of Khan",
+  	    "year" : 1982,
+  	    "type" : "movie"
+          },
+          {
+  	    "_id" : "tt0796366",
+  	    "title" : "Star Trek",
+  	    "year" : 2009,
+  	    "type" : "movie"
+          },
+          {
+  	    "_id" : "tt0084726",
+  	    "title" : "Star Trek II: The Wrath of Khan",
+  	    "year" : 1982,
+  	    "type" : "movie"
+          },
+          {
+  	    "_id" : "tt1408101",
+  	    "title" : "Star Trek Into Darkness",
+  	    "year" : 2013,
+  	    "type" : "movie"
+          },
+          {
+  	    "_id" : "tt0117731",
+  	    "title" : "Star Trek: First Contact",
+  	    "year" : 1996,
+  	    "type" : "movie"
+        }
+    ]
+);
+
+In the inserted document, if we don't specify the _id parameter, then MongoDB assigns a unique ObjectId for this document.
+
+_id is 12 bytes hexadecimal number unique for every document in a collection. 12 bytes are divided as follows −
+
+_id: ObjectId(4 bytes timestamp, 3 bytes machine id, 2 bytes process id, 
+   3 bytes incrementer)
+
+
+ To query data from MongoDB collection, you need to use MongoDB's find() method.
+ >db.COLLECTION_NAME.find()
+ >db.mycol.find().pretty()
+
+ The update() method updates the values in the existing document.
+ >db.COLLECTION_NAME.update(SELECTION_CRITERIA, UPDATED_DATA)
+ 
+ By default, MongoDB will update only a single document. To update multiple documents, you need to set a parameter 'multi' to true.
+
+ 
+ MongoDB's remove() method is used to remove a document from the collection. remove() method accepts two parameters. One is deletion criteria and second is justOne flag.
+ >db.COLLECTION_NAME.remove(DELLETION_CRITTERIA)
+>db.COLLECTION_NAME.remove(DELETION_CRITERIA,1)
+If you don't specify deletion criteria, then MongoDB will delete whole documents from the collection.
+>db.mycol.remove()
+
+
+
+In MongoDB, projection means selecting only the necessary data rather than selecting whole of the data of a document.
+>db.mycol.find({},{"title":1,_id:0})
+MongoDB's find() method, accepts second optional parameter that is list of fields that you want to retrieve. 1 - show, 0 - hide
+
+To limit the records in MongoDB, you need to use limit() method.
+>db.COLLECTION_NAME.find().limit(NUMBER)
+>db.mycol.find({},{"title":1,_id:0}).limit(2)
+method skip() is used to skip the number of documents.
+db.mycol.find({},{"title":1,_id:0}).limit(1).skip(1)
+
+
+To sort documents in MongoDB, you need to use sort() method. The method accepts a document containing a list of fields along with their sorting order. To specify sorting order 1 and -1 are used. 1 is used for ascending order while -1 is used for descending order.
+
+>db.COLLECTION_NAME.find().sort({KEY:1})
+>db.mycol.find({},{"title":1,_id:0}).sort({"title":-1})
+
+Please note, if you don't specify the sorting preference, then sort() method will display the documents in ascending order.
+
+
+
+-------------------------------------------
+
+
+
+  
+
+
+2. INDEXS
+
+3. REPLICATION
+Shutdown already running MongoDB server.
+mongod --port "PORT" --dbpath "YOUR_DB_DATA_PATH" --replSet "REPLICA_SET_INSTANCE_NAME"
+
+mongod --port 27017 --dbpath "D:\mongodb\data" --replSet rs0
+
+
+
